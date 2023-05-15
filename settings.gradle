@@ -14,3 +14,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "UndefinedApp"
 include ':app'
+include ':build-logic'
+include ':build-logic:convension'
