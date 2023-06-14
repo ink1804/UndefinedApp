@@ -1,5 +1,8 @@
 import com.android.build.gradle.BaseExtension
 
+plugins{
+}
+
 configure<BaseExtension> {
     compileSdkVersion(Config.COMPILE_SDK_VERSION)
 
