@@ -1,9 +1,62 @@
 [versions]
 gradle = "7.2.1"
-kotlin = "1.8.21"
+kotlin = "1.8.22"
 google_services = "4.3.15"
+
+# Android
+androidxKtx = "1.7.0"
+androidxFragment = "1.5.5"
+androidxTransition = "1.4.1"
+
+# Compose
+compose = "1.4.3"
+composeActivity = "1.7.2"
+composeLifecycleViewmodel = "2.6.1"
+composeMaterialThemeAdapter = "1.2.1"
+composeConstraintlayout = "1.0.1"
+
+# Coroutines
+coroutines = "1.7.1"
+
+# DI
+dagger = "2.45"
+
+# Navigation
+cicerone = "7.1"
+
+# Log
+timber = "5.0.1"
 
 [libraries]
 gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
 kotlinGradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 googleServicesGradle = { module = "com.google.gms:google-services", version.ref = "google_services" }
+
+# DI
+daggerLib = { module = "com.google.dagger:dagger", version.ref = "dagger" }
+daggerKaptLib = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
+daggerKaptProcessorLib = { module = "com.google.dagger:dagger-android-processor", version.ref = "dagger" }
+daggerAndroidLib = { module = "com.google.dagger:dagger-android-support", version.ref = "dagger" }
+
+# Navigation
+ciceroneLib = { module = "com.github.terrakok:cicerone", version.ref = "cicerone" }
+
+# Log
+timberLib = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
+
+# Compose
+composeUiLib = { module = "androidx.compose.ui:ui", version.ref = "compose" }
+composeMaterialLib = { module = "androidx.compose.material:material", version.ref = "compose" }
+composeUiToolingPreviewLib = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
+composeUiToolingLib = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
+composeAnimationLib = { module = "androidx.compose.animation:animation", version.ref = "compose" }
+composeRuntimeLib = { module = "androidx.compose.runtime:runtime", version.ref = "compose" }
+composeRuntimeLivedataLib = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "compose" }
+composeLifecycleViewmodelLib = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "composeLifecycleViewmodel" }
+composeMaterialThemeAdapterLib = { module = "com.google.android.material:compose-theme-adapter", version.ref = "composeMaterialThemeAdapter" }
+composeActivityLib = { module = "androidx.activity:activity-compose", version.ref = "composeActivity" }
+composeConstraintlayoutLib = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "composeConstraintlayout" }
+
+# Coroutines
+kotlinCoroutinesLib = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+kotlinCoroutinesCoreLib = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }

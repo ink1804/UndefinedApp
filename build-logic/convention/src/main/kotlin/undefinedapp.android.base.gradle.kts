@@ -29,6 +29,14 @@ configure<BaseExtension> {
         apply("org.jetbrains.kotlin.android")
         apply("org.jetbrains.kotlin.kapt")
     }
+
+    dependencies {
+        add("implementation", libs("daggerLib"))
+        add("implementation", libs("daggerAndroidLib"))
+        add("implementation", libs("timberLib"))
+        add("kapt", libs("daggerKaptLib"))
+        add("kapt", libs("daggerKaptProcessorLib"))
+    }
 }
 
 fun libs(lib: String): String {

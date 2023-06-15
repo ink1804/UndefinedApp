@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 rootProject.name = "UndefinedApp"
 include ':app'
 include ':common-ui'
+include ':feature-test'
