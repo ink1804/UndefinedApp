@@ -1,0 +1,9 @@
+[versions]
+gradle = "7.2.1"
+kotlin = "1.8.21"
+google_services = "4.3.15"
+
+[libraries]
+gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
+kotlinGradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+googleServicesGradle = { module = "com.google.gms:google-services", version.ref = "google_services" }
