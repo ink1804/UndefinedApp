@@ -11,6 +11,7 @@ import javax.inject.Singleton
 @Component(
     modules = [
         AppModule::class,
+        ConfigsModule::class,
         CommonNetworkModule::class,
         GptApiModule::class,
         AppApiModule::class

@@ -4,22 +4,12 @@ plugins {
 }
 
 android {
-
-    buildFeatures {
-        compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = Config.COMPOSE_KOTLIN_COMPILER
-    }
-
     dependencies {
-        add("api", libs("composeUiLib"))
-        add("api", libs("composeMaterialLib"))
-        add("api", libs("composeUiToolingPreviewLib"))
-        add("api", libs("composeUiToolingLib"))
+        add("api", libs("kotestAssertionsLib"))
+        add("api", libs("kotestRunnerJunitLib"))
+        add("api", libs("kotestPropertyJvmLib"))
+        add("api", libs("mockkLib"))
     }
-
 }
 
 fun libs(lib: String): String {

@@ -1,5 +1,6 @@
 package com.ink1804.dev.common.network.data.di
 
+import com.ink1804.dev.common.network.CommonNetworkConfig
 import com.ink1804.dev.common.network.data.api.AppApi
 import dagger.Module
 import dagger.Provides
@@ -19,9 +20,12 @@ object AppApiModule {
 
     @Provides
     @Named(APP_API_DAGGER_NAME)
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit =
+    fun provideRetrofit(
+        okHttpClient: OkHttpClient,
+        commonNetworkConfig: CommonNetworkConfig
+    ): Retrofit =
         Retrofit.Builder()
-            .baseUrl("https://appapi.com")
+            .baseUrl(commonNetworkConfig.appApiBaseUrl)
             .client(okHttpClient)
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
