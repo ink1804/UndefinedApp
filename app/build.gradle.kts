@@ -7,6 +7,14 @@ android {
         applicationId = "com.ink1804.dev.undefinedapp"
         setProperty("archivesBaseName", rootProject.name + "_v." + versionName)
     }
+
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = Config.COMPOSE_KOTLIN_COMPILER
+    }
 }
 
 dependencies {

@@ -4,11 +4,15 @@ plugins {
 }
 
 android {
+    defaultConfig{
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
     dependencies {
-        add("api", libs("kotestAssertionsLib"))
-        add("api", libs("kotestRunnerJunitLib"))
-        add("api", libs("kotestPropertyJvmLib"))
-        add("api", libs("mockkLib"))
+        add("testImplementation", libs("kotestAssertionsLib"))
+        add("testImplementation", libs("kotestRunnerJunitLib"))
+        add("testImplementation", libs("kotestPropertyJvmLib"))
+        add("testImplementation", libs("mockkLib"))
     }
 }
 

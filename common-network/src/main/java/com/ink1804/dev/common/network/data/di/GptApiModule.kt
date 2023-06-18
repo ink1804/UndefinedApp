@@ -9,13 +9,16 @@ import com.ink1804.dev.common.network.data.repository.GptRepositoryImpl
 import com.ink1804.dev.common.network.domain.repository.GptRepository
 import com.ink1804.dev.common.network.domain.usecase.GptInteractor
 import com.ink1804.dev.common.network.domain.usecase.GptUseCase
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
+import retrofit2.Converter
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
 
 @Module(
     includes = [
@@ -31,12 +34,13 @@ object GptApiModule {
     @Named(GPT_DAGGER_NAME)
     internal fun provideRetrofit(
         okHttpClient: OkHttpClient,
-        commonNetworkConfig: CommonNetworkConfig
+        commonNetworkConfig: CommonNetworkConfig,
+        converterFactory: Converter.Factory
     ): Retrofit =
         Retrofit.Builder()
             .baseUrl(commonNetworkConfig.gptApiBaseUrl)
             .client(okHttpClient)
-            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(converterFactory)
             .build()
 
     @Provides

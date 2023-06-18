@@ -16,6 +16,6 @@ internal class GptHeaderInterceptor @Inject constructor(
 
     companion object {
         private const val AUTH_HEADER = "Authorization"
-        private const val AUTH_HEADER_PREFIX = "Beaver"
+        private const val AUTH_HEADER_PREFIX = "Bearer"
     }
 }

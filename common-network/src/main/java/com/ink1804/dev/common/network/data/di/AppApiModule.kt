@@ -6,8 +6,8 @@ import dagger.Module
 import dagger.Provides
 import javax.inject.Named
 import okhttp3.OkHttpClient
+import retrofit2.Converter
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
 
 @Module(
     includes = [
@@ -22,12 +22,13 @@ object AppApiModule {
     @Named(APP_API_DAGGER_NAME)
     fun provideRetrofit(
         okHttpClient: OkHttpClient,
-        commonNetworkConfig: CommonNetworkConfig
+        commonNetworkConfig: CommonNetworkConfig,
+        converterFactory: Converter.Factory
     ): Retrofit =
         Retrofit.Builder()
             .baseUrl(commonNetworkConfig.appApiBaseUrl)
             .client(okHttpClient)
-            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(converterFactory)
             .build()
 
     @Named(APP_API_DAGGER_NAME)

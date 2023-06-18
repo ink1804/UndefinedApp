@@ -1,36 +1,37 @@
 package com.ink1804.dev.common.network.data.entity
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+
+@Serializable
 internal data class GptCompletionsResponseData(
-    @Json(name = "id")
+    @SerialName("id")
     val id: String,
-    @Json(name = "choices")
+    @SerialName("choices")
     val choices: List<GptChoiceData>
 )
 
-@JsonClass(generateAdapter = true)
+@Serializable
 internal data class GptChoiceData(
-    @Json(name = "message")
+    @SerialName("message")
     val message: GptMessageData,
-    @Json(name = "finish_reason")
+    @SerialName("finish_reason")
     val finishReason: String,
 )
 
-@JsonClass(generateAdapter = true)
+@Serializable
 internal data class GptCompletionRequestData(
-    @Json(name = "model")
+    @SerialName("model")
     val model: String,
-    @Json(name = "messages")
+    @SerialName("messages")
     val messages: List<GptMessageData>
 )
 
-@JsonClass(generateAdapter = true)
+@Serializable
 internal data class GptMessageData(
-    @Json(name = "role")
+    @SerialName("role")
     val role: String,
-    @Json(name = "content")
+    @SerialName("content")
     val content: String
 )
