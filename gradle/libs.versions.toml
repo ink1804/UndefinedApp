@@ -3,7 +3,105 @@ gradle = "7.2.1"
 kotlin = "1.8.21"
 google_services = "4.3.15"
 
+# Android
+androidxKtx = "1.7.0"
+androidxFragment = "1.5.5"
+androidxTransition = "1.4.1"
+
+# Compose
+compose = "1.4.3"
+composeActivity = "1.7.2"
+composeLifecycleViewmodel = "2.6.1"
+composeMaterialThemeAdapter = "1.2.1"
+composeConstraintlayout = "1.0.1"
+
+# Coroutines
+coroutines = "1.7.1"
+
+# DI
+dagger = "2.45"
+
+# Navigation
+cicerone = "7.1"
+
+# Log
+timber = "5.0.1"
+
+# Network
+retrofit = "2.9.0"
+moshi = "1.14.0"
+kotlinSerializationConverter = "1.0.0"
+kotlinSerialization = "1.5.1"
+okhttp = "4.10.0"
+chucker = "3.5.2"
+
+# Test
+kotest = "5.4.0"
+mockk = "1.12.4"
+kaspresso = "1.5.2"
+
+
 [libraries]
 gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
 kotlinGradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 googleServicesGradle = { module = "com.google.gms:google-services", version.ref = "google_services" }
+kotlinSerializationGradle = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
+
+# DI
+daggerLib = { module = "com.google.dagger:dagger", version.ref = "dagger" }
+daggerKaptLib = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
+daggerKaptProcessorLib = { module = "com.google.dagger:dagger-android-processor", version.ref = "dagger" }
+daggerAndroidLib = { module = "com.google.dagger:dagger-android-support", version.ref = "dagger" }
+
+# Navigation
+ciceroneLib = { module = "com.github.terrakok:cicerone", version.ref = "cicerone" }
+
+# Log
+timberLib = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
+
+# Network
+retrofitLib = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+moshiConverterLib = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
+kotlinConverterLib = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter", version.ref = "kotlinSerializationConverter" }
+
+kotlinSerializationLib = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinSerialization" }
+
+moshiLib = { module = "com.squareup.moshi:moshi", version.ref = "moshi" }
+moshiKotlinLib = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshi" }
+moshiCodegenKaptLib = { module = "com.squareup.moshi:moshi-kotlin-codegen", version.ref = "moshi" }
+
+okhttpLib = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
+okhttpLoggingLib = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp" }
+
+chuckerLib = { module = "com.github.chuckerteam.chucker:library", version.ref = "chucker" }
+chuckerNoOpLib = { module = "com.github.chuckerteam.chucker:library-no-op", version.ref = "chucker" }
+
+
+# Compose
+composeUiLib = { module = "androidx.compose.ui:ui", version.ref = "compose" }
+composeMaterialLib = { module = "androidx.compose.material:material", version.ref = "compose" }
+composeUiToolingPreviewLib = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
+composeUiToolingLib = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
+composeAnimationLib = { module = "androidx.compose.animation:animation", version.ref = "compose" }
+composeRuntimeLib = { module = "androidx.compose.runtime:runtime", version.ref = "compose" }
+composeRuntimeLivedataLib = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "compose" }
+composeLifecycleViewmodelLib = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "composeLifecycleViewmodel" }
+composeMaterialThemeAdapterLib = { module = "com.google.android.material:compose-theme-adapter", version.ref = "composeMaterialThemeAdapter" }
+composeActivityLib = { module = "androidx.activity:activity-compose", version.ref = "composeActivity" }
+composeConstraintlayoutLib = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "composeConstraintlayout" }
+
+# Coroutines
+kotlinCoroutinesLib = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+kotlinCoroutinesCoreLib = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+
+# Unit Test
+kotestAssertionsLib = { module = "io.kotest:kotest-assertions-core-jvm", version.ref = "kotest" }
+kotestRunnerJunitLib = { module = "io.kotest:kotest-runner-junit5-jvm", version.ref = "kotest" }
+kotestPropertyJvmLib = { module = "io.kotest:kotest-property-jvm", version.ref = "kotest" }
+mockkLib = { module = "io.mockk:mockk", version.ref = "mockk" }
+
+# Ui Test
+kaspressoLib = { module = "com.kaspersky.android-components:kaspresso", version.ref = "kaspresso" }
+kaspressoAllureSupportLib = { module = "com.kaspersky.android-components:kaspresso-allure-support", version.ref = "kaspresso" }
+kaspressoComposeSupportLib = { module = "com.kaspersky.android-components:kaspresso-compose-support", version.ref = "kaspresso" }
+

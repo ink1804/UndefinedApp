@@ -13,8 +13,10 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.UndefinedApp">
         <activity
-                android:name=".MainActivity"
-                android:exported="true">
+                android:name=".ui.MainActivity"
+                android:exported="true"
+                android:label="@string/app_name"
+                android:theme="@style/Theme.UndefinedApp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
