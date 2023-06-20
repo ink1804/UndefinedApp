@@ -31,6 +31,8 @@ configure<BaseExtension> {
     }
 
     dependencies {
+        add("implementation", libs("koinLib"))
+        add("implementation", libs("koinAndroidLib"))
         add("implementation", libs("daggerLib"))
         add("implementation", libs("daggerAndroidLib"))
         add("implementation", libs("timberLib"))

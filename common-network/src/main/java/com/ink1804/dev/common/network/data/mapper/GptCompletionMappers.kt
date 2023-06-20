@@ -12,6 +12,14 @@ import com.ink1804.dev.common.network.domain.entity.GptCompletionsResponseEntity
 import com.ink1804.dev.common.network.domain.entity.GptMessageEntity
 import com.ink1804.dev.common.network.domain.entity.GptRoleEntity
 import javax.inject.Inject
+import org.koin.dsl.module
+
+val KoinGptMappersModule = module {
+    single { GptCompletionsRequestEntityDataMapper(get()) }
+    single { GptCompletionsResponseDataEntityMapper(get()) }
+    single { GptMessageMapper() }
+    single { GptChoiceDataEntityMapper(get()) }
+}
 
 internal class GptCompletionsRequestEntityDataMapper @Inject constructor(
     private val messageMapper: GptMessageMapper
