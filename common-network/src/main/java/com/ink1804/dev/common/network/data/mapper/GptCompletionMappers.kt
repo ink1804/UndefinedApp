@@ -1,17 +1,16 @@
 package com.ink1804.dev.common.network.data.mapper
 
+import com.ink1804.dev.common.network.DataEntityMapper
+import com.ink1804.dev.common.network.Mapper
 import com.ink1804.dev.common.network.data.entity.GptChoiceData
 import com.ink1804.dev.common.network.data.entity.GptCompletionRequestData
 import com.ink1804.dev.common.network.data.entity.GptCompletionsResponseData
 import com.ink1804.dev.common.network.data.entity.GptMessageData
-import com.ink1804.dev.common.network.DataEntityMapper
-import com.ink1804.dev.common.network.Mapper
 import com.ink1804.dev.common.network.domain.entity.GptChoiceEntity
 import com.ink1804.dev.common.network.domain.entity.GptCompletionRequestEntity
 import com.ink1804.dev.common.network.domain.entity.GptCompletionsResponseEntity
 import com.ink1804.dev.common.network.domain.entity.GptMessageEntity
 import com.ink1804.dev.common.network.domain.entity.GptRoleEntity
-import javax.inject.Inject
 import org.koin.dsl.module
 
 val KoinGptMappersModule = module {
@@ -21,7 +20,7 @@ val KoinGptMappersModule = module {
     single { GptChoiceDataEntityMapper(get()) }
 }
 
-internal class GptCompletionsRequestEntityDataMapper @Inject constructor(
+internal class GptCompletionsRequestEntityDataMapper(
     private val messageMapper: GptMessageMapper
 ) : Mapper<GptCompletionRequestEntity, GptCompletionRequestData> {
     override fun mapTo(from: GptCompletionRequestEntity): GptCompletionRequestData =
@@ -31,7 +30,7 @@ internal class GptCompletionsRequestEntityDataMapper @Inject constructor(
         )
 }
 
-internal class GptCompletionsResponseDataEntityMapper @Inject constructor(
+internal class GptCompletionsResponseDataEntityMapper(
     private val choiceMapper: GptChoiceDataEntityMapper
 ) : Mapper<GptCompletionsResponseData, GptCompletionsResponseEntity> {
     override fun mapTo(from: GptCompletionsResponseData): GptCompletionsResponseEntity =
@@ -41,7 +40,7 @@ internal class GptCompletionsResponseDataEntityMapper @Inject constructor(
         )
 }
 
-internal class GptMessageMapper @Inject constructor() : DataEntityMapper<GptMessageData, GptMessageEntity> {
+internal class GptMessageMapper : DataEntityMapper<GptMessageData, GptMessageEntity> {
     override fun mapDataEntity(from: GptMessageData): GptMessageEntity =
         GptMessageEntity(
             role = GptRoleEntity.getValueOf(from.role),
@@ -56,7 +55,7 @@ internal class GptMessageMapper @Inject constructor() : DataEntityMapper<GptMess
         )
 }
 
-internal class GptChoiceDataEntityMapper @Inject constructor(
+internal class GptChoiceDataEntityMapper(
     private val messageMapper: GptMessageMapper
 ) : Mapper<GptChoiceData, GptChoiceEntity> {
     override fun mapTo(from: GptChoiceData): GptChoiceEntity =

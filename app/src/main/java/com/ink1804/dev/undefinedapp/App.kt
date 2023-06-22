@@ -14,19 +14,11 @@ import timber.log.Timber
 
 class App : Application() {
 
-    //    @Inject
     val gptUseCase: GptUseCase by inject()
-
-//    val appComponent: AppComponent by lazy {
-//        DaggerAppComponent.builder()
-//            .appModule(AppModule(this))
-//            .build()
-//    }
 
     override fun onCreate() {
         super.onCreate()
         startDI()
-//        appComponent.inject(this)
         Timber.plant(Timber.DebugTree())
         testGptRequest()
     }
