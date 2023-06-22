@@ -22,6 +22,7 @@ fun CompView() {
     Box(modifier = Modifier.fillMaxSize()) {
         PqGradientViewCompose.Compose(
 
+
         )
         Column(
             modifier = Modifier.fillMaxSize(),
