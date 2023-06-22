@@ -9,12 +9,12 @@ android {
 }
 
 dependencies {
-    api(libs.retrofitLib)
-    api(libs.okhttpLoggingLib)
-    implementation(libs.okhttpLib)
+    api(libs.ktorCoreLib)
+    api(libs.ktorOkhttpLib)
+    implementation(libs.ktorNegotiationLib)
+    implementation(libs.ktorSerializationLib)
 
-    implementation(libs.kotlinSerializationLib)
-    implementation(libs.kotlinConverterLib)
+    api(libs.okhttpLoggingLib)
 
     debugApi(libs.chuckerLib)
     releaseApi(libs.chuckerNoOpLib)
