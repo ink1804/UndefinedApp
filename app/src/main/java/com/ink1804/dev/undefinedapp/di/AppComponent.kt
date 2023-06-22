@@ -11,6 +11,5 @@ val KoinAppComponent = module {
         KoinConfigModule,
         KoinAppApiModule,
         KoinGptApiModule,
-        KoinCommonNetworkModule,
     )
 }

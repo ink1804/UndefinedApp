@@ -12,7 +12,7 @@ import com.ink1804.dev.common.network.domain.usecase.GptInteractor
 import com.ink1804.dev.common.network.domain.usecase.GptUseCase
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.defaultRequest
-import org.koin.core.qualifier.StringQualifier
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 
@@ -30,16 +30,17 @@ val KoinGptApiModule = module {
             completionsResponseMapper = get()
         )
     }
-    single<GptUseCase> { GptInteractor(gptRepository = get()) }
+    factory<GptUseCase> { GptInteractor(gptRepository = get()) }
 
     single<HeaderInterceptor> {
         GptHeaderInterceptor(commonNetworkConfig = get())
     }
 
-    single {
+    factory {
         provideKtor(
-            client = get(StringQualifier(COMMON_NETWORK_QUALIFIER)),
-            config = get())
+            client = get(named(COMMON_NETWORK_QUALIFIER)),
+            config = get()
+        )
     }
 }
 
