@@ -1,12 +1,8 @@
 package com.ink1804.dev.common.network.data.di
 
-import dagger.Module
+import org.koin.dsl.module
 
-@Module(
-    includes = [
-        CommonNetworkModule::class
-    ]
-)
-object AppApiModule {
-
+val KoinAppApiModule = module {
+    includes(KoinCommonNetworkModule)
 }
+

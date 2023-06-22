@@ -1,11 +1,10 @@
 package com.ink1804.dev.common.network.data.interceptor
 
 import com.ink1804.dev.common.network.CommonNetworkConfig
-import javax.inject.Inject
 import okhttp3.Interceptor.Chain
 import okhttp3.Response
 
-internal class GptHeaderInterceptor @Inject constructor(
+internal class GptHeaderInterceptor(
     private val commonNetworkConfig: CommonNetworkConfig
 ) : HeaderInterceptor {
     override fun intercept(chain: Chain): Response {

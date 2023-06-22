@@ -3,14 +3,11 @@ package com.ink1804.dev.common.network.data.repository
 import com.ink1804.dev.common.network.data.api.GptApi
 import com.ink1804.dev.common.network.data.mapper.GptCompletionsRequestEntityDataMapper
 import com.ink1804.dev.common.network.data.mapper.GptCompletionsResponseDataEntityMapper
-import com.ink1804.dev.common.network.domain.repository.GptRepository
 import com.ink1804.dev.common.network.domain.entity.GptCompletionRequestEntity
 import com.ink1804.dev.common.network.domain.entity.GptCompletionsResponseEntity
-import javax.inject.Inject
-import javax.inject.Singleton
+import com.ink1804.dev.common.network.domain.repository.GptRepository
 
-@Singleton
-internal class GptRepositoryImpl @Inject constructor(
+internal class GptRepositoryImpl(
     private val gptApi: GptApi,
     private val completionsRequestMapper: GptCompletionsRequestEntityDataMapper,
     private val completionsResponseMapper: GptCompletionsResponseDataEntityMapper
