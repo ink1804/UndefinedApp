@@ -21,6 +21,9 @@ dependencies {
     implementation(project(":common-network"))
     implementation(project(":common-ui"))
     implementation(project(":feature-test"))
+    implementation(project(":feature-splash"))
+    implementation(project(":feature-main"))
 
     implementation(libs.composeActivityLib)
+    implementation(libs.composeAccompanistLib)
 }

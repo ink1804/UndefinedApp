@@ -18,6 +18,7 @@ android {
         add("api", libs("composeMaterialLib"))
         add("api", libs("composeUiToolingPreviewLib"))
         add("api", libs("composeUiToolingLib"))
+        add("api", libs("composeNavigationLib"))
     }
 
 }

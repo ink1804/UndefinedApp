@@ -14,6 +14,8 @@ composeActivity = "1.7.2"
 composeLifecycleViewmodel = "2.6.1"
 composeMaterialThemeAdapter = "1.2.1"
 composeConstraintlayout = "1.0.1"
+composeNavigation = "2.6.0"
+composeAccompanist = "0.30.1"
 
 # Coroutines
 coroutines = "1.7.1"
@@ -49,11 +51,13 @@ kotlinSerializationGradle = { module = "org.jetbrains.kotlin:kotlin-serializatio
 # DI
 koinLib = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koinAndroidLib = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+koinComposeLib = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
+koinViewModelLib = { module = "io.insert-koin:koin-androidx-viewmodel", version.ref = "koin" }
 
-daggerLib = { module = "com.google.dagger:dagger", version.ref = "dagger" }
-daggerKaptLib = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
-daggerKaptProcessorLib = { module = "com.google.dagger:dagger-android-processor", version.ref = "dagger" }
-daggerAndroidLib = { module = "com.google.dagger:dagger-android-support", version.ref = "dagger" }
+#implementation "io.insert-koin:koin-androidx-scope:$koin_version"
+#implementation "io.insert-koin:koin-androidx-fragment:$koin_version"
+#implementation "io.insert-koin:koin-androidx-workmanager:$koin_version"
+#implementation "io.insert-koin:koin-androidx-ext:$koin_version"
 
 # Navigation
 ciceroneLib = { module = "com.github.terrakok:cicerone", version.ref = "cicerone" }
@@ -87,6 +91,8 @@ composeLifecycleViewmodelLib = { module = "androidx.lifecycle:lifecycle-viewmode
 composeMaterialThemeAdapterLib = { module = "com.google.android.material:compose-theme-adapter", version.ref = "composeMaterialThemeAdapter" }
 composeActivityLib = { module = "androidx.activity:activity-compose", version.ref = "composeActivity" }
 composeConstraintlayoutLib = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "composeConstraintlayout" }
+composeNavigationLib = { module = "androidx.navigation:navigation-compose", version.ref = "composeNavigation" }
+composeAccompanistLib = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "composeAccompanist" }
 
 # Coroutines
 kotlinCoroutinesLib = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
