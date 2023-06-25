@@ -17,6 +17,9 @@ rootProject.name = "UndefinedApp"
 include ':app'
 include ':common-ui'
 include ':common-network'
+
 include ':feature-test'
 include ':feature-splash'
 include ':feature-main'
+include ':feature-map'
+include ':feature-profile'

@@ -1,4 +1,4 @@
-package com.ink1804.dev.feature.main
+package com.ink1804.dev.feature.map
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe

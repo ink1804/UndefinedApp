@@ -1,4 +1,4 @@
-package com.ink1804.dev.feature.main.ui
+package com.ink1804.dev.feature.map.ui
 
 import androidx.compose.material.Button
 import androidx.compose.material.Text
@@ -8,12 +8,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.ink1804.dev.common.ui.BaseScreen
 
 @Composable
-fun MainScreen() {
+fun MapScreen() {
     BaseScreen(
         contentAlignment = Alignment.Center
     ) {
         Button(onClick = { }) {
-            Text(text = "Home")
+            Text(text = "Map")
         }
     }
 }
@@ -21,6 +21,6 @@ fun MainScreen() {
 @Composable
 @Preview
 fun Preview() {
-    MainScreen()
+    MapScreen()
 }
 

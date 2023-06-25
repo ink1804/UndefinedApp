@@ -23,6 +23,8 @@ dependencies {
     implementation(project(":feature-test"))
     implementation(project(":feature-splash"))
     implementation(project(":feature-main"))
+    implementation(project(":feature-map"))
+    implementation(project(":feature-profile"))
 
     implementation(libs.composeActivityLib)
     implementation(libs.composeAccompanistLib)
