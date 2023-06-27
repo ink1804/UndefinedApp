@@ -1,6 +1,7 @@
 import com.android.build.gradle.BaseExtension
 
 plugins{
+    id("org.jetbrains.kotlin.android")
 }
 
 configure<BaseExtension> {
@@ -12,22 +13,14 @@ configure<BaseExtension> {
         versionCode = Config.getVersionCode()
         versionName = Config.getVersionName()
 
-        buildConfigField("int", "VERSION_CODE", "$versionCode")
-        buildConfigField("String", "VERSION_NAME", "\"$versionName\"")
+        //move to app module
+//        buildConfigField("int", "VERSION_CODE", "$versionCode")
+//        buildConfigField("String", "VERSION_NAME", "\"$versionName\"")
     }
-
+    namespace = "com.ink1804.dev.undefinedapp"
     compileOptions {
         setSourceCompatibility(Config.JAVA_SOURCE)
         setTargetCompatibility(Config.JAVA_TARGET)
-    }
-
-    viewBinding {
-        isEnabled = true
-    }
-
-    pluginManager.apply {
-        apply("org.jetbrains.kotlin.android")
-        apply("org.jetbrains.kotlin.kapt")
     }
 
     dependencies {

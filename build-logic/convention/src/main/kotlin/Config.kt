@@ -9,9 +9,9 @@ object Config {
 
     const val COMPOSE_KOTLIN_COMPILER = "1.4.7"
 
-    val JAVA_SOURCE = JavaVersion.VERSION_1_8
-    val JAVA_TARGET = JavaVersion.VERSION_1_8
-    val JVM_TARGET = JavaVersion.VERSION_1_8.toString()
+    val JAVA_SOURCE = JavaVersion.VERSION_19
+    val JAVA_TARGET = JavaVersion.VERSION_19
+    val JVM_TARGET = JavaVersion.VERSION_19.toString()
 
     fun getVersionName(): String {
         return getVersionProperties()["version.name"].toString()

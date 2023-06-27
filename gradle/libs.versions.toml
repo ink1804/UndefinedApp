@@ -1,5 +1,5 @@
 [versions]
-gradle = "7.2.1"
+gradle = "8.0.2"
 kotlin = "1.8.21"
 google_services = "4.3.15"
 

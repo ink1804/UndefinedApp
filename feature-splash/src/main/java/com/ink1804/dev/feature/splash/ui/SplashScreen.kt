@@ -4,8 +4,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.Button
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -13,7 +11,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ink1804.dev.common.ui.BaseScreen
-import com.ink1804.dev.common.ui.R.drawable
+import com.ink1804.dev.common.ui.R
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -25,7 +23,7 @@ fun SplashScreen(
         Column() {
             Image(
                 modifier = Modifier.size(100.dp, 100.dp),
-                painter = painterResource(id = drawable.ic_24_question),
+                painter = painterResource(id = R.drawable.ic_24_question),
                 contentDescription = null
             )
         }
@@ -40,7 +38,7 @@ fun Preview() {
         Column() {
             Image(
                 modifier = Modifier.size(100.dp, 100.dp),
-                painter = painterResource(id = drawable.ic_24_question),
+                painter = painterResource(id = R.drawable.ic_24_question),
                 contentDescription = null
             )
         }
