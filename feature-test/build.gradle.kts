@@ -3,9 +3,5 @@ plugins {
     id("undefinedapp.test")
 }
 
-android {
-}
-
 dependencies {
-
 }

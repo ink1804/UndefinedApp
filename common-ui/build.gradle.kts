@@ -1,5 +1,5 @@
 plugins {
-    id("undefinedapp.android.library")
+    id("undefinedapp.android.library.compose")
 }
 
 android {

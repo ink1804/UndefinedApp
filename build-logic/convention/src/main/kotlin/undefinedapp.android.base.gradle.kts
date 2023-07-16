@@ -32,7 +32,7 @@ configure<BaseExtension> {
 
     dependencies {
         add("implementation", libs("koinLib"))
-        add("implementation", libs("koinAndroidLib"))
+        add("implementation", libs("koinComposeLib"))
         add("implementation", libs("timberLib"))
     }
 }
