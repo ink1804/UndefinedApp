@@ -6,6 +6,7 @@ pluginManagement {
         mavenCentral()
     }
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
     repositories {
@@ -23,3 +24,4 @@ include ':feature-splash'
 include ':feature-main'
 include ':feature-map'
 include ':feature-profile'
+include ':shared'

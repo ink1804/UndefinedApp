@@ -3,6 +3,7 @@ plugins {
 }
 
 android {
+    namespace = "com.ink1804.dev.common.ui"
 }
 
 dependencies {
