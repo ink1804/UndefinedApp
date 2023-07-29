@@ -18,6 +18,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":shared-common-network"))
     implementation(project(":common-network"))
     implementation(project(":common-ui"))
     implementation(project(":feature-test"))

@@ -1,7 +1,7 @@
 package com.ink1804.dev.undefinedapp
 
 import android.app.Application
-import com.ink1804.dev.common.network.domain.usecase.GptUseCase
+import com.ink1804.dev.shared.common.network.domain.usecase.TestUseCase
 import com.ink1804.dev.undefinedapp.di.KoinAppComponent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -14,7 +14,7 @@ import timber.log.Timber
 
 class App : Application() {
 
-    val gptUseCase: GptUseCase by inject()
+    val testUseCase: TestUseCase by inject()
 
     override fun onCreate() {
         super.onCreate()
@@ -33,7 +33,7 @@ class App : Application() {
 
     private fun testGptRequest() {
         GlobalScope.launch(Dispatchers.IO) {
-            gptUseCase.completions()
+            testUseCase.docs()
         }
     }
 }

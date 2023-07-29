@@ -67,6 +67,7 @@ timberLib = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 
 # Network
 ktorCoreLib = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktorDarwinLib = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
 ktorOkhttpLib = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
 ktorNegotiationLib = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 ktorSerializationLib = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
