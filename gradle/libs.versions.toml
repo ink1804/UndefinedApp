@@ -3,6 +3,9 @@ gradle = "8.0.2"
 kotlin = "1.8.21"
 google_services = "4.3.15"
 
+# Google
+googleMaps = "18.1.0"
+googleMapsSecrets = "2.0.1"
 # Android
 androidxKtx = "1.7.0"
 androidxFragment = "1.5.5"
@@ -16,6 +19,7 @@ composeMaterialThemeAdapter = "1.2.1"
 composeConstraintlayout = "1.0.1"
 composeNavigation = "2.6.0"
 composeAccompanist = "0.30.1"
+composeMaps = '2.11.4'
 
 # Coroutines
 coroutines = "1.7.1"
@@ -47,6 +51,9 @@ gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
 kotlinGradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 googleServicesGradle = { module = "com.google.gms:google-services", version.ref = "google_services" }
 kotlinSerializationGradle = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
+
+# Google
+googleServicesMaps = { module = "com.google.android.gms:play-services-maps", version.ref = "googleMaps" }
 
 # DI
 koinLib = { module = "io.insert-koin:koin-core", version.ref = "koin" }
@@ -94,6 +101,7 @@ composeActivityLib = { module = "androidx.activity:activity-compose", version.re
 composeConstraintlayoutLib = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "composeConstraintlayout" }
 composeNavigationLib = { module = "androidx.navigation:navigation-compose", version.ref = "composeNavigation" }
 composeAccompanistLib = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "composeAccompanist" }
+composeMapsLib = { module = "com.google.maps.android:maps-compose", version.ref = "composeMaps" }
 
 # Coroutines
 kotlinCoroutinesLib = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
@@ -110,3 +118,5 @@ kaspressoLib = { module = "com.kaspersky.android-components:kaspresso", version.
 kaspressoAllureSupportLib = { module = "com.kaspersky.android-components:kaspresso-allure-support", version.ref = "kaspresso" }
 kaspressoComposeSupportLib = { module = "com.kaspersky.android-components:kaspresso-compose-support", version.ref = "kaspresso" }
 
+[plugins]
+googleMapsSecretsPlugin = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "googleMapsSecrets" }

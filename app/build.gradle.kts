@@ -8,6 +8,15 @@ android {
         setProperty("archivesBaseName", rootProject.name + "_v." + versionName)
     }
 
+    signingConfigs {
+        getByName("debug") {
+            keyAlias = "undefinedapp"
+            keyPassword = "undefinedapp"
+            storeFile = file("../undefinedapp.key.jks")
+            storePassword = "undefinedapp"
+        }
+    }
+
     buildFeatures {
         compose = true
     }

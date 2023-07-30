@@ -5,13 +5,16 @@ buildscript {
         gradlePluginPortal()
         mavenCentral()
     }
-
     dependencies {
         classpath(libs.gradle)
         classpath(libs.kotlinGradle)
         classpath(libs.googleServicesGradle)
         classpath(libs.kotlinSerializationGradle)
     }
+}
+
+plugins {
+    alias(libs.plugins.googleMapsSecretsPlugin)
 }
 
 task clean(type: Delete) {
