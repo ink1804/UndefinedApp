@@ -1,6 +1,6 @@
 plugins {
     id("com.android.library")
-    id("undefinedapp.android.base")
+    id("android-library-base")
     id("undefinedapp.compose")
     kotlin("android")
 }
