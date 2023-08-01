@@ -18,15 +18,18 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.ink1804.dev.common.ui.NavControllerProvider
+import com.ink1804.dev.undefinedapp.di.koinMainActivityModule
 import com.ink1804.dev.undefinedapp.ui.theme.UndefinedappTheme
 import org.koin.androidx.compose.inject
+import org.koin.core.context.loadKoinModules
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            App()
-        }
+        loadKoinModules(koinMainActivityModule(this))
+
+        setContent { App() }
     }
 }
 

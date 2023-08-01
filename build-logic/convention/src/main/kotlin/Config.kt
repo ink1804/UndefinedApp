@@ -13,6 +13,8 @@ object Config {
     val JAVA_TARGET = JavaVersion.VERSION_19
     val JVM_TARGET = JavaVersion.VERSION_19.toString()
 
+    val GOOGLE_MAP_API_KEY = "AIzaSyBr627bsTdP1CXec7Lv6cAV6yNxlMLLBWs"
+
     fun getVersionName(): String {
         return getVersionProperties()["version.name"].toString()
     }

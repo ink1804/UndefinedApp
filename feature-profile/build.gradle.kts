@@ -5,4 +5,5 @@ plugins {
 
 dependencies {
     implementation(project(":common-ui"))
+    implementation(libs.googleAuthLib)
 }

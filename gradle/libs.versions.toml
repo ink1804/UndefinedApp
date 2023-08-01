@@ -3,9 +3,14 @@ gradle = "8.0.2"
 kotlin = "1.8.21"
 google_services = "4.3.15"
 
+# Firebase
+firebaseBom = "32.2.0"
+
 # Google
 googleMaps = "18.1.0"
 googleMapsSecrets = "2.0.1"
+googlePlayServices = "20.6.0"
+
 # Android
 androidxKtx = "1.7.0"
 androidxFragment = "1.5.5"
@@ -52,9 +57,12 @@ kotlinGradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.r
 googleServicesGradle = { module = "com.google.gms:google-services", version.ref = "google_services" }
 kotlinSerializationGradle = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
 
+# Firebase
+firebaseBomLib = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+firebaseAnalyticsLib = { module = "com.google.firebase:firebase-analytics-ktx" }
 # Google
-googleServicesMaps = { module = "com.google.android.gms:play-services-maps", version.ref = "googleMaps" }
-
+googleServicesMapsLib = { module = "com.google.android.gms:play-services-maps", version.ref = "googleMaps" }
+googleAuthLib = { module = "com.google.android.gms:play-services-auth", version.ref = "googlePlayServices" }
 # DI
 koinLib = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koinAndroidLib = { module = "io.insert-koin:koin-android", version.ref = "koin" }

@@ -33,7 +33,7 @@ class App : Application() {
 
     private fun testGptRequest() {
         GlobalScope.launch(Dispatchers.IO) {
-            testUseCase.docs()
+//            testUseCase.docs()
         }
     }
 }
