@@ -13,16 +13,18 @@ import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.ink1804.dev.common.ui.AppColors.CardColor
 import com.ink1804.dev.common.ui.AppColors.TextColor
 import com.ink1804.dev.common.ui.BaseScreen
 import com.ink1804.dev.common.ui.BuildConfig
+import com.ink1804.dev.common.ui.base.collect
 import org.koin.androidx.compose.koinViewModel
-
 
 @Composable
 fun ProfileScreen(
@@ -33,25 +35,22 @@ fun ProfileScreen(
             viewModel.handleGoogleLogin(it.data)
         }
 
+    //todo create extension for this call
+    LaunchedEffect(key1 = "signInFlow") {
+        viewModel.signInFlow.collect {
+            googleAuthResultLauncher.launch(it)
+        }
+    }
+
     BaseScreen(
         contentAlignment = Alignment.BottomCenter
     ) {
-        val mItems = listOf(
-            "Settings",
-            "About",
-            "Rate app!",
-            if (viewModel.getLastSignedInAccount() == null) "Log In" else "Log Out"
-        )
         LazyColumn(modifier = Modifier.fillMaxSize()) {
-            items(mItems) {
-                ListItem(text = it, onClick = {
-                    if (viewModel.getLastSignedInAccount() == null) {
-                        val googleSignInClient = viewModel.getGoogleSignInClient()
-                        googleAuthResultLauncher.launch(googleSignInClient.signInIntent)
-                    } else {
-                        viewModel.signOut()
-                    }
-                })
+            items(viewModel.menuItems) {
+                ListItem(
+                    it,
+                    onClick = viewModel::onItemClick
+                )
             }
         }
         Text(
@@ -63,7 +62,7 @@ fun ProfileScreen(
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun ListItem(text: String, modifier: Modifier = Modifier, onClick: () -> Unit) {
+fun ListItem(item: ProfileListItem, modifier: Modifier = Modifier, onClick: (ProfileListItemType) -> Unit) {
     val context = LocalContext.current
     Row(
         modifier
@@ -78,15 +77,13 @@ fun ListItem(text: String, modifier: Modifier = Modifier, onClick: () -> Unit) {
             modifier = modifier.fillMaxWidth(),
             backgroundColor = CardColor,
             onClick = {
-                onClick.invoke()
-                Toast
-                    .makeText(context, " Click on $text", Toast.LENGTH_SHORT)
-                    .show()
+                onClick.invoke(item.type)
+                Toast.makeText(context, "Click on ${item.type.name}", Toast.LENGTH_SHORT).show()
             }
         ) {
             Text(
                 modifier = Modifier.padding(ProfileScreensDimens.listItemTextPadding),
-                text = text,
+                text = stringResource(id = item.textRes),
                 color = TextColor
             )
         }

@@ -9,18 +9,17 @@ import com.google.android.gms.common.api.ApiException
 import com.ink1804.dev.common.ui.ActivityContext
 import timber.log.Timber
 
-
-interface SignInRepository {
+interface GoogleSignInManager {
     fun getLastSignedInAccount(): GoogleSignInAccount?
     fun getGoogleSignInClient(): GoogleSignInClient
-    fun handleGoogleLogin(data: Intent?)
+    suspend fun handleGoogleLogin(data: Intent?): GoogleSignInResult
     fun signOut()
     fun revokeAccess()
 }
 
-class SignInRepositoryImpl(
+internal class GoogleSignInManagerImpl(
     private val activityContext: ActivityContext
-) : SignInRepository {
+) : GoogleSignInManager {
 
     override fun getLastSignedInAccount(): GoogleSignInAccount? {
         return GoogleSignIn.getLastSignedInAccount(activityContext)
@@ -36,19 +35,24 @@ class SignInRepositoryImpl(
         return GoogleSignIn.getClient(activityContext, gso)
     }
 
-    override fun handleGoogleLogin(data: Intent?) {
-        try {
+    override suspend fun handleGoogleLogin(data: Intent?): GoogleSignInResult {
+        var email: String? = null
+        return try {
             GoogleSignIn
                 .getSignedInAccountFromIntent(data)
                 .getResult(ApiException::class.java)
-                ?.let { singInData -> //todo delete after test instagram login in fb (PRQA-6083)
-                    singInData.email?.let { Timber.wtf("email: $it") }
-                    singInData
-                }
-                ?.idToken
-                ?.let { token -> Timber.wtf("token: $token") }
+                ?.let { singInData ->
+                    singInData.email?.let {
+                        GoogleSignInResult(it, "token")
+                    }
+
+                } ?: throw Error("hgl52", "qwe")
+//                ?.idToken
+//                ?.let { token ->
+//                } ?: throw Error("hgl52", "qwe")
         } catch (error: ApiException) {
             Timber.wtf("err: $error")
+            throw Error("hgl52", "Api")
         }
     }
 
@@ -67,5 +71,12 @@ class SignInRepositoryImpl(
             }
     }
 }
+
+data class GoogleSignInResult(
+    val email: String,
+    val token: String
+)
+
+open class Error(val errCode: String, val text: String) : Throwable(text)
 
 
