@@ -7,6 +7,11 @@ interface NavControllerProvider {
 
     @Throws(NavHostProviderIsNotSet::class)
     fun get(): NavHostController
+
+    @Throws(NavHostProviderIsNotSet::class)
+    fun navigate(destination: String){
+        get().navigate(destination)
+    }
 }
 
 class NavHostProviderIsNotSet : Throwable()

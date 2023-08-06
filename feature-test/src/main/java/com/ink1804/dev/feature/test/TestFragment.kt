@@ -14,9 +14,6 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 
-class TestFragment {
-}
-
 @Composable
 fun CompView() {
     Box(modifier = Modifier.fillMaxSize()) {

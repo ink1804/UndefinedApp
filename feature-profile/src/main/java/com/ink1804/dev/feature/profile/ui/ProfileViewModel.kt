@@ -77,8 +77,8 @@ class ProfileViewModel(
 
     fun onItemClick(itemType: ProfileListItemType) {
         when (itemType) {
-            ProfileListItemType.Settings,
-            ProfileListItemType.About,
+            ProfileListItemType.Settings -> openSettingsScreen()
+            ProfileListItemType.About -> openAboutScreen()
             ProfileListItemType.RateUs -> Unit
             ProfileListItemType.SignIn -> {
                 val googleSignInClient = getGoogleSignInClient()

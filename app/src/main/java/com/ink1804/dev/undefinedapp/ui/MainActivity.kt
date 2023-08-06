@@ -82,7 +82,7 @@ fun BottomNavigation(
             BottomNavigationItem(
                 icon = { Icon(painterResource(id = screen.iconId), contentDescription = null) },
                 label = { Text(stringResource(screen.resourceId)) },
-                selected = currentDestination?.hierarchy?.any { it.route == screen.route.screenName } == true,
+                selected = currentDestination?.hierarchy?.any { it.route?.contains(screen.route.screenName) ?: false } == true,
                 onClick = { appState.navigateToBottomBarRoute(screen.route.screenName) }
             )
         }

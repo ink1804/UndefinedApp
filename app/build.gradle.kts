@@ -26,6 +26,8 @@ dependencies {
     implementation(project(":feature-main"))
     implementation(project(":feature-map"))
     implementation(project(":feature-profile"))
+    implementation(project(":feature-about"))
+    implementation(project(":feature-settings"))
 
     implementation(libs.composeActivityLib)
     implementation(libs.composeAccompanistLib)

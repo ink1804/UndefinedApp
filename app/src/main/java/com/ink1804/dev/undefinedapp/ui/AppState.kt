@@ -12,6 +12,7 @@ import androidx.navigation.NavGraph
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.ink1804.dev.undefinedapp.navigation.AppDestination
 
 @Composable
 fun rememberAppState(
@@ -36,11 +37,16 @@ class AppState(
 
     val shouldShowBottomBar: Boolean
         @Composable get() = navController
-            .currentBackStackEntryAsState().value?.destination?.route in bottomBarRoutes
+            .currentBackStackEntryAsState().value?.destination?.route != AppDestination.Splash.screenName
 
     // Click on navigation menu(tab)
     fun navigateToBottomBarRoute(route: String) {
         if (route != currentRoute) {
+            //todo strange solution with screen1/screen2, need to fix it
+            if (currentRoute?.contains(route) == true){
+                navController.navigateUp()
+                return
+            }
             navController.navigate(route) {
                 // Avoid multiple copies of the same destination when
                 // reselecting the same item

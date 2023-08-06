@@ -1,9 +1,11 @@
 package com.ink1804.dev.undefinedapp.navigation
 
 enum class AppDestination(val screenName: String) {
-    Splash("splash_screen"),
+    Splash("splash"),
 
-    Main("main_screen"),
-    Map("map_screen"),
-    Profile("profile_screen"),
+    Main("main"),
+    Map("map"),
+    Profile("profile"),
+    Settings("profile/settings"),
+    About("profile/about"),
 }

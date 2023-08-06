@@ -5,6 +5,4 @@ plugins {
 
 dependencies {
     implementation(project(":common-ui"))
-    implementation(libs.googleAuthLib)
-    implementation(libs.composeConstraintlayoutLib)
 }

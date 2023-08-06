@@ -7,6 +7,6 @@ class SplashCoordinatorImpl(
     private val navControllerProvider: NavControllerProvider
 ) : SplashCoordinator {
     override fun navigateMainScreen() {
-        navControllerProvider.get().navigate(AppDestination.Main.screenName)
+        navControllerProvider.navigate(AppDestination.Main.screenName)
     }
 }
