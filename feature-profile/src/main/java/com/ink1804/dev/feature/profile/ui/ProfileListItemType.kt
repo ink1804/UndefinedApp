@@ -1,7 +1,7 @@
 package com.ink1804.dev.feature.profile.ui
 
 import androidx.annotation.StringRes
-import com.ink1804.dev.undefinedapp.R
+import com.ink1804.dev.common.ui.R
 
 enum class ProfileListItemType(@StringRes val textRes: Int) {
     Settings(R.string.profile_item_settings),

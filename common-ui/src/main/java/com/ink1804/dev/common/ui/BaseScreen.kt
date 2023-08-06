@@ -18,7 +18,7 @@ fun BaseScreen(
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(Color.DarkGray),
+            .background(UndColors.Level1Color),
         contentAlignment = contentAlignment,
         content = content
     )

@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Text
@@ -25,12 +24,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import com.ink1804.dev.common.ui.BaseScreen
 import com.ink1804.dev.common.ui.BuildConfig
 import com.ink1804.dev.common.ui.R
 import com.ink1804.dev.common.ui.UndColors
 import com.ink1804.dev.common.ui.base.collect
+import com.ink1804.dev.common.ui.component.NoRippleInteractionSource
+import com.ink1804.dev.common.ui.component.UndButton
 import com.ink1804.dev.common.ui.component.UndImage
+import com.ink1804.dev.common.ui.component.bounceClick
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -64,7 +67,7 @@ fun ProfileScreen(
             modifier = Modifier.padding(ProfileScreensDimens.versionTextPadding),
             text = "V ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
         )
-        UndImage(resId = R.drawable.ic_16_arrow_back)
+        UndImage(resId = R.drawable.ic_24_arrow_back, onClick = {})
     }
 }
 
@@ -101,108 +104,229 @@ fun ListItem(item: ProfileListItem, modifier: Modifier = Modifier, onClick: (Pro
 @Composable
 @Preview
 fun Preview() {
-    ProfileRedesignScreen()
+    Content()
 }
 
 @Composable
-fun ProfileRedesignScreen() {
+fun ProfileRedesignScreen(
+    viewModel: ProfileViewModel = koinViewModel()
+) {
+    val context = LocalContext.current
+    val googleAuthResultLauncher =
+        rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            viewModel.handleGoogleLogin(it.data)
+        }
+
+    //todo create extension for this call
+    LaunchedEffect(key1 = "signInFlow") {
+        viewModel.signInFlow.collect {
+            googleAuthResultLauncher.launch(it)
+        }
+    }
+
+    Content(
+        onBackClick = {},
+        onSettingsClick = { viewModel.openSettingsScreen() },
+        onSignInClick = { viewModel.onSignInClick() },
+        onAboutClick = { viewModel.openAboutScreen() },
+        onSupportClick = {
+            Toast.makeText(context, "Support Click", Toast.LENGTH_SHORT).show()
+        }
+
+    )
+
+}
+
+@Composable
+internal fun Content(
+    onBackClick: () -> Unit = {},
+    onSettingsClick: () -> Unit = {},
+    onSignInClick: () -> Unit = {},
+    onAboutClick: () -> Unit = {},
+    onSupportClick: () -> Unit = {},
+) {
     ConstraintLayout(
         modifier = Modifier
             .fillMaxSize()
             .background(color = UndColors.Level1Color)
     ) {
         val (
-            text,
-            card,
-            backButton,
-            settingButton,
-            profileImage,
-            userName,
-            signInButton,
+            cardAccount,
+            textVersion,
+            cardSupport,
+            cardAbout,
         ) = createRefs()
 
-        Card(
-            shape = RoundedCornerShape(24.dp),
-            backgroundColor = UndColors.Level2Color,
+        AccountCard(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(4.dp)
-                .constrainAs(card) {
+                .padding(8.dp)
+                .constrainAs(cardAccount) {
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                     top.linkTo(parent.top)
-                }) {
-            ConstraintLayout {
-                UndImage(
-                    modifier = Modifier
-                        .padding(16.dp)
-                        .constrainAs(backButton) {
-                            top.linkTo(parent.top)
-                            start.linkTo(parent.start)
-                        }
-                        .clickable {
+                },
+            onBackClick = onBackClick,
+            onSettingsClick = onSettingsClick,
+            onSignInClick = onSignInClick,
+        )
 
-                        },
-                    resId = R.drawable.ic_16_arrow_back
-                )
+        ActionCard(
+            modifier = Modifier
+                .padding(top = 24.dp)
+                .constrainAs(cardSupport) {
+                    top.linkTo(cardAccount.bottom)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                    width = Dimension.fillToConstraints
+                },
+            text = stringResource(id = R.string.profile_item_support),
+            onClick = onSupportClick
+        )
 
-                UndImage(
-                    modifier = Modifier
-                        .padding(16.dp)
-                        .constrainAs(settingButton) {
-                            top.linkTo(parent.top)
-                            end.linkTo(parent.end)
-                        }
-                        .clickable {
+        ActionCard(
+            modifier = Modifier
+                .padding(vertical = 8.dp)
+                .constrainAs(cardAbout) {
+                    top.linkTo(cardSupport.bottom)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                    width = Dimension.fillToConstraints
+                },
+            text = stringResource(id = R.string.profile_item_about),
+            onClick = onAboutClick
+        )
 
-                        },
-                    resId = R.drawable.ic_16_settings
-                )
-
-                Text(
-                    "Account",
-                    Modifier.constrainAs(text) {
-                        top.linkTo(backButton.top, margin = 16.dp)
-                        bottom.linkTo(backButton.bottom, margin = 16.dp)
-                        start.linkTo(backButton.end, margin = 16.dp)
-                        end.linkTo(settingButton.start, margin = 16.dp)
-                    },
-                    color = UndColors.TitleColor,
-                )
-
-                UndImage(
-                    modifier = Modifier
-                        .constrainAs(profileImage) {
-                            top.linkTo(backButton.bottom, 16.dp)
-                            start.linkTo(parent.start, 16.dp)
-                            bottom.linkTo(parent.bottom, 16.dp)
-                        },
-                    resId = R.drawable.ic_24_profile_outline,
-                    size = 64.dp,
-                    cornerRadius = 16.dp
-                )
-
-                Text(
-                    modifier = Modifier.constrainAs(userName) {
-                        top.linkTo(profileImage.top)
-                        start.linkTo(profileImage.end, 16.dp)
-                        bottom.linkTo(signInButton.top)
-                    },
-                    text = "Undefined User",
-                    color = UndColors.TitleColor,
-                )
-
-                Button(
-                    modifier = Modifier
-                        .constrainAs(signInButton) {
-                            top.linkTo(userName.bottom)
-                            bottom.linkTo(profileImage.bottom)
-                            start.linkTo(profileImage.end, 16.dp)
-                        },
-                    onClick = { /*TODO*/ }) {
-                    Text(text = "SignIn")
+        Text(
+            modifier = Modifier
+                .constrainAs(textVersion) {
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                    bottom.linkTo(parent.bottom)
                 }
-            }
+                .padding(ProfileScreensDimens.versionTextPadding),
+            text = "V ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})",
+            color = UndColors.TitleColor
+        )
+    }
+}
+
+@Composable
+fun AccountCard(
+    modifier: Modifier,
+    onBackClick: () -> Unit = {},
+    onSettingsClick: () -> Unit = {},
+    onSignInClick: () -> Unit = {},
+) {
+    Card(
+        shape = RoundedCornerShape(24.dp),
+        backgroundColor = UndColors.Level2Color,
+        modifier = modifier
+    ) {
+        ConstraintLayout {
+            val (
+                text,
+                backButton,
+                settingButton,
+                profileImage,
+                userName,
+                signInButton,
+            ) = createRefs()
+            UndImage(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .bounceClick()
+                    .constrainAs(backButton) {
+                        top.linkTo(parent.top)
+                        start.linkTo(parent.start)
+                    },
+                resId = R.drawable.ic_24_arrow_back,
+                onClick = onBackClick
+            )
+
+            UndImage(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .bounceClick()
+                    .constrainAs(settingButton) {
+                        top.linkTo(parent.top)
+                        end.linkTo(parent.end)
+                    },
+                resId = R.drawable.ic_24_settings,
+                onClick = onSettingsClick
+            )
+
+            Text(
+                "Account",
+                Modifier.constrainAs(text) {
+                    top.linkTo(backButton.top, margin = 16.dp)
+                    bottom.linkTo(backButton.bottom, margin = 16.dp)
+                    start.linkTo(backButton.end, margin = 16.dp)
+                    end.linkTo(settingButton.start, margin = 16.dp)
+                },
+                color = UndColors.TitleColor,
+            )
+
+            UndImage(
+                modifier = Modifier
+                    .constrainAs(profileImage) {
+                        top.linkTo(backButton.bottom, 8.dp)
+                        start.linkTo(parent.start, 16.dp)
+                        bottom.linkTo(parent.bottom, 16.dp)
+                    },
+                resId = R.drawable.ic_24_profile_outline,
+                size = 100.dp,
+                cornerRadius = 32.dp,
+            )
+
+            Text(
+                modifier = Modifier.constrainAs(userName) {
+                    top.linkTo(profileImage.top)
+                    start.linkTo(profileImage.end, 16.dp)
+                    bottom.linkTo(signInButton.top)
+                },
+                text = "Undefined User",
+                color = UndColors.TitleColor,
+            )
+
+            UndButton(
+                text = "Sing In",
+                modifier = Modifier
+                    .constrainAs(signInButton) {
+                        top.linkTo(userName.bottom)
+                        bottom.linkTo(profileImage.bottom)
+                        start.linkTo(profileImage.end, 16.dp)
+                    }
+                    .bounceClick(),
+                onClick = onSignInClick
+            )
         }
+    }
+}
+
+@Composable
+fun ActionCard(
+    modifier: Modifier,
+    text: String,
+    onClick: () -> Unit
+) {
+    Card(
+        shape = RoundedCornerShape(12.dp),
+        backgroundColor = UndColors.Level2Color,
+        modifier = modifier
+            .bounceClick(0.97f)
+            .clickable(
+                interactionSource = NoRippleInteractionSource(),
+                indication = null
+            ) {
+                onClick.invoke()
+            }
+            .padding(horizontal = 8.dp)
+    ) {
+        Text(
+            modifier = Modifier.padding(ProfileScreensDimens.listItemTextPadding),
+            text = text,
+            color = UndColors.TitleColor
+        )
     }
 }

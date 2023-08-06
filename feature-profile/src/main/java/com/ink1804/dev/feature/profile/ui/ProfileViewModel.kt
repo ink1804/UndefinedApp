@@ -19,10 +19,12 @@ class ProfileViewModel(
 
     //todo move to flowViewModel
     val menuItems = mutableStateListOf<ProfileListItem>()
+    val isAuthorized = stateFlow(false)
 
     val signInFlow = sharedFlow<Intent>()
 
     init {
+        isAuthorized.emit(getLastSignedInAccount() != null)
         menuItems.addAll(
             listOf(
                 ProfileListItem(ProfileListItemType.Settings),
@@ -73,6 +75,13 @@ class ProfileViewModel(
 
     private fun revokeAccess() {
         googleSignInManager.revokeAccess()
+    }
+
+    fun onSignInClick() {
+        val googleSignInClient = getGoogleSignInClient()
+        viewModelScope.launch {
+            signInFlow.emit(googleSignInClient.signInIntent)
+        }
     }
 
     fun onItemClick(itemType: ProfileListItemType) {

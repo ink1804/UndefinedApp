@@ -14,7 +14,7 @@ import androidx.navigation.compose.composable
 import com.ink1804.dev.feature.about.ui.AboutScreen
 import com.ink1804.dev.feature.main.ui.MainScreen
 import com.ink1804.dev.feature.map.ui.MapScreen
-import com.ink1804.dev.feature.profile.ui.ProfileScreen
+import com.ink1804.dev.feature.profile.ui.ProfileRedesignScreen
 import com.ink1804.dev.feature.settings.ui.SettingsScreen
 import com.ink1804.dev.feature.splash.ui.SplashScreen
 import com.ink1804.dev.undefinedapp.navigation.AppDestination
@@ -30,7 +30,7 @@ fun NavigationGraph(navController: NavHostController, paddingValues: PaddingValu
 
         composable(AppDestination.Main) { MainScreen() }
         composable(AppDestination.Map) { MapScreen() }
-        composable(AppDestination.Profile) { ProfileScreen() }
+        composable(AppDestination.Profile) { ProfileRedesignScreen() }
         composable(AppDestination.Settings) { SettingsScreen() }
         composable(AppDestination.About) { AboutScreen() }
     }

@@ -17,7 +17,9 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.ink1804.dev.common.ui.NavControllerProvider
+import com.ink1804.dev.common.ui.UndColors
 import com.ink1804.dev.undefinedapp.di.koinMainActivityModule
 import com.ink1804.dev.undefinedapp.ui.theme.UndefinedappTheme
 import org.koin.androidx.compose.inject
@@ -43,9 +45,9 @@ fun App() {
 
 @Composable
 fun AppUi() {
-//    val systemUiController = rememberSystemUiController()
-//    systemUiController.setStatusBarColor(Color.Transparent, true)
-//    systemUiController.setNavigationBarColor(Color.Green)
+    val systemUiController = rememberSystemUiController()
+    systemUiController.setStatusBarColor(UndColors.StatusBarColor, false)
+    systemUiController.setNavigationBarColor(UndColors.NavigationBarColor)
 }
 
 @Composable
