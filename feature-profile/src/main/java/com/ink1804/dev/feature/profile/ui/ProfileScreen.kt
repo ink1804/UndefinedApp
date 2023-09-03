@@ -5,19 +5,15 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -25,10 +21,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
-import com.ink1804.dev.common.ui.BaseScreen
 import com.ink1804.dev.common.ui.BuildConfig
 import com.ink1804.dev.common.ui.R
 import com.ink1804.dev.common.ui.UndColors
+import com.ink1804.dev.common.ui.base.DefaultDimens
 import com.ink1804.dev.common.ui.base.collect
 import com.ink1804.dev.common.ui.component.NoRippleInteractionSource
 import com.ink1804.dev.common.ui.component.UndButton
@@ -36,69 +32,9 @@ import com.ink1804.dev.common.ui.component.UndImage
 import com.ink1804.dev.common.ui.component.bounceClick
 import org.koin.androidx.compose.koinViewModel
 
-@Composable
-fun ProfileScreen(
-    viewModel: ProfileViewModel = koinViewModel()
-) {
-    val googleAuthResultLauncher =
-        rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            viewModel.handleGoogleLogin(it.data)
-        }
-
-    //todo create extension for this call
-    LaunchedEffect(key1 = "signInFlow") {
-        viewModel.signInFlow.collect {
-            googleAuthResultLauncher.launch(it)
-        }
-    }
-
-    BaseScreen(
-        contentAlignment = Alignment.BottomCenter
-    ) {
-        LazyColumn(modifier = Modifier.fillMaxSize()) {
-            items(viewModel.menuItems) {
-                ListItem(
-                    it,
-                    onClick = viewModel::onItemClick
-                )
-            }
-        }
-        Text(
-            modifier = Modifier.padding(ProfileScreensDimens.versionTextPadding),
-            text = "V ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
-        )
-        UndImage(resId = R.drawable.ic_24_arrow_back, onClick = {})
-    }
-}
-
-@OptIn(ExperimentalMaterialApi::class)
-@Composable
-fun ListItem(item: ProfileListItem, modifier: Modifier = Modifier, onClick: (ProfileListItemType) -> Unit) {
-    val context = LocalContext.current
-    Row(
-        modifier
-            .fillMaxWidth()
-            .padding(
-                top = ProfileScreensDimens.listItemPadding,
-                start = ProfileScreensDimens.listItemPadding,
-                end = ProfileScreensDimens.listItemPadding
-            )
-    ) {
-        Card(
-            modifier = modifier.fillMaxWidth(),
-            backgroundColor = UndColors.Level2Color,
-            onClick = {
-                onClick.invoke(item.type)
-                Toast.makeText(context, "Click on ${item.type.name}", Toast.LENGTH_SHORT).show()
-            }
-        ) {
-            Text(
-                modifier = Modifier.padding(ProfileScreensDimens.listItemTextPadding),
-                text = stringResource(id = item.textRes),
-                color = UndColors.TitleColor
-            )
-        }
-    }
+private object ProfileDimens {
+    val iconSize = 100.dp
+    const val cardBounceClick = 0.97f
 }
 
 @Composable
@@ -124,7 +60,10 @@ fun ProfileRedesignScreen(
         }
     }
 
+    val authState = remember { viewModel.isAuthorized }
+
     Content(
+        authState.value,
         onBackClick = {},
         onSettingsClick = { viewModel.openSettingsScreen() },
         onSignInClick = { viewModel.onSignInClick() },
@@ -132,13 +71,12 @@ fun ProfileRedesignScreen(
         onSupportClick = {
             Toast.makeText(context, "Support Click", Toast.LENGTH_SHORT).show()
         }
-
     )
-
 }
 
 @Composable
 internal fun Content(
+    isAuthorized: Boolean = false,
     onBackClick: () -> Unit = {},
     onSettingsClick: () -> Unit = {},
     onSignInClick: () -> Unit = {},
@@ -160,7 +98,7 @@ internal fun Content(
         AccountCard(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
+                .padding(DefaultDimens.paddingMedium)
                 .constrainAs(cardAccount) {
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
@@ -169,11 +107,12 @@ internal fun Content(
             onBackClick = onBackClick,
             onSettingsClick = onSettingsClick,
             onSignInClick = onSignInClick,
+            isAuthorized = isAuthorized,
         )
 
         ActionCard(
             modifier = Modifier
-                .padding(top = 24.dp)
+                .padding(top = DefaultDimens.paddingLarge)
                 .constrainAs(cardSupport) {
                     top.linkTo(cardAccount.bottom)
                     start.linkTo(parent.start)
@@ -186,7 +125,7 @@ internal fun Content(
 
         ActionCard(
             modifier = Modifier
-                .padding(vertical = 8.dp)
+                .padding(vertical = DefaultDimens.paddingMedium)
                 .constrainAs(cardAbout) {
                     top.linkTo(cardSupport.bottom)
                     start.linkTo(parent.start)
@@ -217,9 +156,10 @@ fun AccountCard(
     onBackClick: () -> Unit = {},
     onSettingsClick: () -> Unit = {},
     onSignInClick: () -> Unit = {},
+    isAuthorized: Boolean = false
 ) {
     Card(
-        shape = RoundedCornerShape(24.dp),
+        shape = RoundedCornerShape(DefaultDimens.shapeRadiusBig),
         backgroundColor = UndColors.Level2Color,
         modifier = modifier
     ) {
@@ -234,7 +174,7 @@ fun AccountCard(
             ) = createRefs()
             UndImage(
                 modifier = Modifier
-                    .padding(16.dp)
+                    .padding(DefaultDimens.paddingBig)
                     .bounceClick()
                     .constrainAs(backButton) {
                         top.linkTo(parent.top)
@@ -246,7 +186,7 @@ fun AccountCard(
 
             UndImage(
                 modifier = Modifier
-                    .padding(16.dp)
+                    .padding(DefaultDimens.paddingBig)
                     .bounceClick()
                     .constrainAs(settingButton) {
                         top.linkTo(parent.top)
@@ -257,12 +197,12 @@ fun AccountCard(
             )
 
             Text(
-                "Account",
-                Modifier.constrainAs(text) {
-                    top.linkTo(backButton.top, margin = 16.dp)
-                    bottom.linkTo(backButton.bottom, margin = 16.dp)
-                    start.linkTo(backButton.end, margin = 16.dp)
-                    end.linkTo(settingButton.start, margin = 16.dp)
+                text = stringResource(id = R.string.screen_account),
+                modifier = Modifier.constrainAs(text) {
+                    top.linkTo(backButton.top, margin = DefaultDimens.paddingBig)
+                    bottom.linkTo(backButton.bottom, margin = DefaultDimens.paddingBig)
+                    start.linkTo(backButton.end, margin = DefaultDimens.paddingBig)
+                    end.linkTo(settingButton.start, margin = DefaultDimens.paddingBig)
                 },
                 color = UndColors.TitleColor,
             )
@@ -270,32 +210,32 @@ fun AccountCard(
             UndImage(
                 modifier = Modifier
                     .constrainAs(profileImage) {
-                        top.linkTo(backButton.bottom, 8.dp)
-                        start.linkTo(parent.start, 16.dp)
-                        bottom.linkTo(parent.bottom, 16.dp)
+                        top.linkTo(backButton.bottom, DefaultDimens.paddingMedium)
+                        start.linkTo(parent.start, DefaultDimens.paddingBig)
+                        bottom.linkTo(parent.bottom, DefaultDimens.paddingBig)
                     },
                 resId = R.drawable.ic_24_profile_outline,
-                size = 100.dp,
-                cornerRadius = 32.dp,
+                size = ProfileDimens.iconSize,
+                cornerRadius = DefaultDimens.shapeRadiusLarge,
             )
 
             Text(
                 modifier = Modifier.constrainAs(userName) {
                     top.linkTo(profileImage.top)
-                    start.linkTo(profileImage.end, 16.dp)
+                    start.linkTo(profileImage.end, DefaultDimens.paddingBig)
                     bottom.linkTo(signInButton.top)
                 },
-                text = "Undefined User",
+                text = stringResource(id = R.string.profile_undefined_user),
                 color = UndColors.TitleColor,
             )
 
             UndButton(
-                text = "Sing In",
+                text = stringResource(id = if (isAuthorized) R.string.profile_log_out else R.string.profile_sign_in),
                 modifier = Modifier
                     .constrainAs(signInButton) {
                         top.linkTo(userName.bottom)
                         bottom.linkTo(profileImage.bottom)
-                        start.linkTo(profileImage.end, 16.dp)
+                        start.linkTo(profileImage.end, DefaultDimens.paddingBig)
                     }
                     .bounceClick(),
                 onClick = onSignInClick
@@ -311,17 +251,17 @@ fun ActionCard(
     onClick: () -> Unit
 ) {
     Card(
-        shape = RoundedCornerShape(12.dp),
+        shape = RoundedCornerShape(DefaultDimens.shapeRadiusMiddle),
         backgroundColor = UndColors.Level2Color,
         modifier = modifier
-            .bounceClick(0.97f)
+            .bounceClick(ProfileDimens.cardBounceClick)
             .clickable(
                 interactionSource = NoRippleInteractionSource(),
                 indication = null
             ) {
                 onClick.invoke()
             }
-            .padding(horizontal = 8.dp)
+            .padding(horizontal = DefaultDimens.paddingMedium)
     ) {
         Text(
             modifier = Modifier.padding(ProfileScreensDimens.listItemTextPadding),
